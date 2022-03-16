@@ -1,5 +1,5 @@
-const { User, Thought } = require("../models");
-
+const { User } = require("../models");
+const { Thought } = require("../Models");
 module.exports = {
   // Get all thoughts
   getThoughts(req, res) {
@@ -12,7 +12,6 @@ module.exports = {
         return res.status(500).json(err);
       });
   },
-
   // Get a single thought
   getSingleThought(req, res) {
     Thought.findOne({ _id: req.params.thoughtId })
@@ -31,7 +30,6 @@ module.exports = {
 
   // create a new thought
   createThought(req, res) {
-    console.log(req.body);
     if (!req.body?.thoughtText || !req.body?.username) {
       res
         .status(404)
@@ -61,7 +59,6 @@ module.exports = {
                     .status(404)
                     .json({ message: "Error writing thought to user" });
                 else {
-                  console.log(user);
                   res.json(thought);
                 }
               })
